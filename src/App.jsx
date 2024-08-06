@@ -1,11 +1,21 @@
-import { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
+import { useEffect } from "react";
 import { initialColors } from "./lib/colors";
 import Color from "./Components/Color/Color";
 import ColorForm from "./Components/Color/ColorForm";
 import "./App.css";
 
 function App() {
-  const [colors, setColors] = useState(initialColors);
+  const [colors, setColors] = useLocalStorageState("themeColors", {
+    defaultValue: initialColors,
+  });
+
+  useEffect(() => {
+    // Überprüfen, ob colors leer ist und dann initialColors setzen, falls nötig
+    if (colors.length === 0) {
+      setColors(initialColors);
+    }
+  }, [colors, setColors]);
 
   const handleAddColor = (newColor) => {
     setColors([newColor, ...colors]);
