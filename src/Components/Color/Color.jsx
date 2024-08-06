@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import "./Color.css";
 import DeleteConfirmation from "./DeleteConfirmation";
 import ColorForm from "./ColorForm";
+import CopyToClipboard from ".src/Components/Functions/CopyToClipboard";
 
 function Color({ color, onDelete, onEdit }) {
   const [showConfirm, setShowConfirm] = useState(false);
