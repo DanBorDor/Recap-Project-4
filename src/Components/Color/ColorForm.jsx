@@ -4,10 +4,16 @@ import React, { useState } from "react";
 import { nanoid } from "nanoid";
 import ColorInput from "./ColorInput";
 
-function ColorForm({ onAddColor }) {
-  const [role, setRole] = useState("Primary");
-  const [hex, setHex] = useState("#000000");
-  const [contrastText, setContrastText] = useState("#ffffff");
+function ColorForm({
+  onAddColor,
+  initialRole = "Please Enter Color Title",
+  initialHex = "#000000",
+  initialContrastText = "#ffffff",
+  onSubmit,
+}) {
+  const [role, setRole] = useState(initialRole);
+  const [hex, setHex] = useState(initialHex);
+  const [contrastText, setContrastText] = useState(initialContrastText);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +23,11 @@ function ColorForm({ onAddColor }) {
       hex,
       contrastText,
     };
-    onAddColor(newColor);
+    if (onAddColor) {
+      onAddColor(newColor);
+    } else if (onSubmit) {
+      onSubmit({ role, hex, contrastText });
+    }
     setRole("");
     setHex("#000000");
     setContrastText("#ffffff");
@@ -41,7 +51,7 @@ function ColorForm({ onAddColor }) {
         <label>Contrast Text:</label>
         <ColorInput value={contrastText} onChange={setContrastText} />
       </div>
-      <button type="submit">Add Color</button>
+      <button type="submit">{onAddColor ? "Add Color" : "Save Changes"}</button>
     </form>
   );
 }
