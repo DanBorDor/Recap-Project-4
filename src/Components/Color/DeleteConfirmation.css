@@ -1,0 +1,19 @@
+/* In DeleteConfirmation.css */
+.delete-confirmation {
+  background-color: white;
+  border: 1px solid black;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+.delete-confirmation p {
+  margin: 0 0 10px;
+}
+
+.delete-confirmation button {
+  margin-right: 10px;
+}
