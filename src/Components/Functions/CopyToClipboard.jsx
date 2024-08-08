@@ -2,31 +2,23 @@
 import React, { useState, useEffect } from "react";
 /* eslint-enable no-unused-vars */
 
-function CopyToClipboard({ hex }) {
-  const [copied, setCopied] = useState(false);
+function CopyToClipboard({ text }) {
+  const [showcopied, setShowCopied] = useState(false);
 
-  const handleCopy = async () => {
+  const handleCopyClick = async () => {
     try {
-      await navigator.clipboard.writeText(hex);
-      setCopied(true);
+      await navigator.clipboard.writeText(text);
+      setShowCopied(true);
+      setTimeout(() => setShowCopied(false), 3000);
     } catch (err) {
       console.error("Failed to copy: ", err);
     }
   };
 
-  useEffect(() => {
-    if (copied) {
-      const timer = setTimeout(() => {
-        setCopied(false);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [copied]);
-
   return (
     <div>
-      <button onClick={handleCopy}>Copy to Clipboard</button>
-      {copied && <span>Copied!</span>}
+      <button onClick={handleCopyClick}>Copy to Clipboard</button>
+      {showcopied && <span>Copied!</span>}
     </div>
   );
 }
