@@ -1,13 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 /* eslint-enable no-unused-vars */
 import "./Color.css";
 import DeleteConfirmation from "./DeleteConfirmation";
 import ColorForm from "./ColorForm";
+import CopyToClipboard from "/src/Components/Functions/CopyToClipboard.jsx";
 
 function Color({ color, onDelete, onEdit }) {
   const [showConfirm, setShowConfirm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  //const [showCopied, setShowCopied] = useState(false);
 
   const handleDeleteClick = () => {
     setShowConfirm(true);
@@ -56,6 +58,7 @@ function Color({ color, onDelete, onEdit }) {
           <p style={{ color: color.contrastText }}>{color.contrastText}</p>
           <button onClick={handleEditClick}>Edit</button>
           <button onClick={handleDeleteClick}>Delete</button>
+          <CopyToClipboard text={color.hex} />
         </>
       )}
       {showConfirm && (
